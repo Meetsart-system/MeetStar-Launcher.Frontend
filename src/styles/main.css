@@ -4,6 +4,20 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#app {
+  height: 100%;
+}
+
 body {
   font-family: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+  background: #12141a;
+  color: #e6e8ee;
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
 }

@@ -8,6 +8,10 @@ interface LauncherHost {
   LoadAppsJson(): Promise<string>
   SaveAppsJson(json: string): Promise<void>
   LaunchApp(name: string): Promise<void>
+  OpenConfigFolder(): Promise<void>
+  MinimizeWindow(): Promise<void>
+  ToggleMaximizeWindow(): Promise<string>
+  CloseWindow(): Promise<void>
 }
 
 function getHost(): LauncherHost | null {
@@ -38,4 +42,25 @@ export async function launchApp(name: string): Promise<void> {
     return
   }
   await host.LaunchApp(name)
+}
+
+export async function openConfigFolder(): Promise<void> {
+  const host = getHost()
+  if (!host) return
+  await host.OpenConfigFolder()
+}
+
+export async function minimizeWindow(): Promise<void> {
+  await getHost()?.MinimizeWindow()
+}
+
+/** 切换最大化/还原，返回切换后的状态 */
+export async function toggleMaximizeWindow(): Promise<string> {
+  const host = getHost()
+  if (!host) return 'normal'
+  return host.ToggleMaximizeWindow()
+}
+
+export async function closeWindow(): Promise<void> {
+  await getHost()?.CloseWindow()
 }
